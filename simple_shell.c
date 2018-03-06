@@ -94,8 +94,14 @@ int exeArgs(char **argTokens)
 	// Successful fork(), continue to exec()
 	if(pid == 0)
 	{
+		// Child section here:
+	
 		//printf("%s\n" , "fork() successful...") ;
 		execvp(argTokens[0] , argTokens) ;
+		
+		// Bad shell command so child never executes , give error and kill useless child:
+		printf("%s\n" , "ERROR: Can't execute this command") ;
+		exit(1) ;
 	}
 	
 	// fork() failed
@@ -110,7 +116,7 @@ int exeArgs(char **argTokens)
 	}
 	
 	// Because we want to keep prompting the user for input like a normal shell
-	return 1;
+	return 0;
 }
 
 
